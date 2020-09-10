@@ -24,7 +24,6 @@ const SignUp: FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('signup form submit......');
     const { displayName, email, password, confirmPassword } = signupValues;
 
     if (password !== confirmPassword) {

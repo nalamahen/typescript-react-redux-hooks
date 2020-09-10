@@ -41,8 +41,6 @@ const App: FC = (): JSX.Element => {
     };
   }, []);
 
-  console.log('currentUser:', currentUser);
-
   return (
     <div>
       <Header currentUser={currentUser} />

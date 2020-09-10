@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { signInWithGoogle } from '../../firebase/firebase-utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase-utils';
 
 import FormInput from '../form-input/FormInout';
 import CustomButton from '../custom-button/CustomButton';
@@ -19,9 +20,19 @@ interface ILogin {
 const SignIn: FC = () => {
   const [login, setLogin] = useState<ILogin>({ email: '', password: '' });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('handle submit ......');
+
+    const { email, password } = login;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setLogin({ email: '', password: '' });
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
+
     setLogin({ email: '', password: '' });
   };
 
