@@ -11,3 +11,7 @@ export interface IItem {
   imageUrl: string;
   price: number;
 }
+
+export interface IUser {
+  user: firebase.User | null;
+}
