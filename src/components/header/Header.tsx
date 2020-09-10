@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import { auth } from '../../firebase/firebase-utils';
 
@@ -17,8 +17,6 @@ interface IProps {
 }
 
 const Header: FC<IProps> = ({ currentUser }: IProps): JSX.Element => {
-  console.log('currentUser', currentUser);
-
   return (
     <HeaderContainer>
       <LogoContainer to="/">

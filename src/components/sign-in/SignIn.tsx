@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { signInWithGoogle } from '../../firebase/firebase-utils';
 
-import FormInout from '../form-input/FormInout';
+import FormInput from '../form-input/FormInout';
 import CustomButton from '../custom-button/CustomButton';
 
 import {
@@ -21,7 +21,7 @@ const SignIn: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log('handle submit ......');
     setLogin({ email: '', password: '' });
   };
 
@@ -35,14 +35,14 @@ const SignIn: FC = () => {
       <SignInTitle>I already have an account</SignInTitle>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <FormInout
+        <FormInput
           type="text"
           name="email"
           value={login.email}
           handleChange={handleChange}
           label="Email"
         />
-        <FormInout
+        <FormInput
           type="password"
           name="password"
           value={login.password}
@@ -50,9 +50,7 @@ const SignIn: FC = () => {
           label="Password"
         />
         <ButtonsBarContainer>
-          <CustomButton onClick={() => alert('Sign In click')}>
-            Sign In
-          </CustomButton>
+          <CustomButton onClick={() => handleSubmit}>Sign In</CustomButton>
           <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
             Sign In with Goolge
           </CustomButton>
