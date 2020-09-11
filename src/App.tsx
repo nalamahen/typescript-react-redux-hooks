@@ -1,10 +1,14 @@
 // Libs
 import React, { FC, useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 //
 import { auth, createUserProfileDocument } from './firebase/firebase-utils';
+
+//actions
+import { setCurrentUser } from './redux/actions/user';
 
 // components
 import Header from './components/header';
@@ -16,9 +20,7 @@ import ShopPage from './components/pages/shop/';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const App: FC = (): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
-
+const App: FC = (props: any): JSX.Element => {
   useEffect(() => {
     const unsuscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -26,14 +28,14 @@ const App: FC = (): JSX.Element => {
 
         if (userRef) {
           userRef.onSnapshot((snapShot) => {
-            setCurrentUser({
+            props.setCurrentUser({
               id: snapShot.id,
               ...snapShot.data(),
             });
           });
         }
       }
-      setCurrentUser(userAuth);
+      props.setCurrentUser(userAuth);
     });
 
     return () => {
@@ -43,7 +45,7 @@ const App: FC = (): JSX.Element => {
 
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header />
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -54,4 +56,8 @@ const App: FC = (): JSX.Element => {
   );
 };
 
-export default App;
+const mapDispatchToProps = (dispatch: any) => ({
+  setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(App);

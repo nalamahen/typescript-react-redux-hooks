@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { connect } from 'react-redux';
 
 import { auth } from '../../firebase/firebase-utils';
 
@@ -37,4 +38,10 @@ const Header: FC<IProps> = ({ currentUser }: IProps): JSX.Element => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state: any) => {
+  return {
+    currentUser: state.user.currentUser,
+  };
+};
+
+export default connect(mapStateToProps)(Header);
