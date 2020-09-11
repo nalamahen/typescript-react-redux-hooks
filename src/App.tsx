@@ -1,7 +1,7 @@
 // Libs
 import React, { FC, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 //
@@ -50,14 +50,24 @@ const App: FC = (props: any): JSX.Element => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={ShopPage} />
-        <Route exact path="/signin" component={SignInAndSignUp} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+          }
+        />
       </Switch>
     </div>
   );
 };
 
+const mapStateToProps = (state: any) => ({
+  currentUser: state.user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch: any) => ({
   setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
