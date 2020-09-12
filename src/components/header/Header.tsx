@@ -2,9 +2,12 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 
 import { auth } from '../../firebase/firebase-utils';
+import { ICurrentUser, IGlobalState } from '../../interfaces';
 
 // Components
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import CartIcon from '../card-icon/CardIcon';
+import CartDropdown from '../cart-dropdown/CartDropdown';
 
 import {
   HeaderContainer,
@@ -14,10 +17,11 @@ import {
 } from './Header.styles';
 
 interface IProps {
-  currentUser: any;
+  currentUser: ICurrentUser;
+  hidden: boolean;
 }
 
-const Header: FC<IProps> = ({ currentUser }: IProps): JSX.Element => {
+const Header: FC<IProps> = ({ currentUser, hidden }: IProps): JSX.Element => {
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -33,15 +37,19 @@ const Header: FC<IProps> = ({ currentUser }: IProps): JSX.Element => {
         ) : (
           <OptionLink to="/signin">SIGN IN</OptionLink>
         )}
+        <CartIcon />
       </OptionsContainer>
+      {hidden ? null : <CartDropdown />}
     </HeaderContainer>
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    currentUser: state.user.currentUser,
-  };
-};
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { hidden },
+}: IGlobalState) => ({
+  currentUser,
+  hidden,
+});
 
 export default connect(mapStateToProps)(Header);

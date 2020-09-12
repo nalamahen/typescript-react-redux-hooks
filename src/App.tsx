@@ -1,11 +1,13 @@
 // Libs
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 //
 import { auth, createUserProfileDocument } from './firebase/firebase-utils';
+import { ICurrentUser } from './interfaces';
 
 //actions
 import { setCurrentUser } from './redux/actions/user';
@@ -66,8 +68,8 @@ const mapStateToProps = (state: any) => ({
   currentUser: state.user.currentUser,
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setCurrentUser: (user: ICurrentUser) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

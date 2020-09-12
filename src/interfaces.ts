@@ -1,3 +1,8 @@
+export interface IGlobalState {
+  user: { currentUser: ICurrentUser };
+  cart: ICart;
+}
+
 export interface ICurrentUser {
   id?: string;
   createdAt?: ICreatedAt;
@@ -8,6 +13,10 @@ export interface ICurrentUser {
 interface ICreatedAt {
   seconds: number;
   nanoseconds: number;
+}
+
+export interface ICart {
+  hidden: boolean;
 }
 
 export interface ICollection {
