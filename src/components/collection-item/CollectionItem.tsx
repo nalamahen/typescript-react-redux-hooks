@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { IItem } from '../../interfaces';
+import { addItem } from '../../redux/actions/cart';
+
 import {
+  AddButton,
   BackgroundImage,
   CollectionFooterContainer,
   CollectionItemContainer,
@@ -9,7 +14,13 @@ import {
   PriceContainer,
 } from './CollectionItem.styles';
 
-const CollectionItem: FC<IItem> = ({ name, price, imageUrl }) => {
+interface IProps {
+  item: IItem;
+  addItem: Function;
+}
+
+const CollectionItem: FC<IProps> = ({ item, addItem }) => {
+  const { name, price, imageUrl } = item;
   return (
     <CollectionItemContainer>
       <BackgroundImage imageUrl={imageUrl} />
@@ -17,8 +28,19 @@ const CollectionItem: FC<IItem> = ({ name, price, imageUrl }) => {
         <NameContainer>{name}</NameContainer>
         <PriceContainer>£{price}</PriceContainer>
       </CollectionFooterContainer>
+      <AddButton
+        onClick={() => {
+          addItem(item);
+        }}
+      >
+        Add to cart
+      </AddButton>
     </CollectionItemContainer>
   );
 };
 
-export default CollectionItem;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addItem: (item: IItem) => dispatch(addItem(item)),
+});
+
+export default connect(null, mapDispatchToProps)(CollectionItem);

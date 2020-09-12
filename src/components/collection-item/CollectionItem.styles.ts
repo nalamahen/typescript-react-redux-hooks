@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import CustomButton from '../custom-button/CustomButton';
+
 interface IProps {
   imageUrl: string;
 }
@@ -20,6 +22,14 @@ export const CollectionItemContainer = styled.div`
       display: flex;
     }
   }
+`;
+
+export const AddButton = styled(CustomButton)`
+  width: 80%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  display: none;
 `;
 
 export const BackgroundImage = styled.div<IProps>`

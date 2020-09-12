@@ -11,7 +11,7 @@ import {
 
 interface IProps {
   title: string;
-  items: Array<IItem>;
+  items: IItem[];
 }
 
 const PreviewCollection: FC<IProps> = ({ title, items }): JSX.Element => {
@@ -21,8 +21,8 @@ const PreviewCollection: FC<IProps> = ({ title, items }): JSX.Element => {
       <PreviewContainer>
         {items
           .filter((item, index) => index < 4)
-          .map(({ id, ...otherItemProps }) => (
-            <CollectionItem key={id} {...otherItemProps} />
+          .map((item) => (
+            <CollectionItem key={item.id} item={item} />
           ))}
       </PreviewContainer>
     </CollectionPreviewContainer>

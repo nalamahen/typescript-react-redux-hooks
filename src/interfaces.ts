@@ -17,6 +17,7 @@ interface ICreatedAt {
 
 export interface ICart {
   hidden: boolean;
+  cartItems: IItem[];
 }
 
 export interface ICollection {
@@ -31,4 +32,5 @@ export interface IItem {
   name: string;
   imageUrl: string;
   price: number;
+  quantity?: number;
 }
