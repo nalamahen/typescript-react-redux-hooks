@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { CustomButtonContainer } from './CustomButton.styles';
 
-interface IProps {
+export interface IProps {
   children: string;
   onClick: () => void;
   isGoogleSignIn?: boolean;
