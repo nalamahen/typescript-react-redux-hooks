@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { auth } from '../../firebase/firebase-utils';
 import { ICurrentUser, IGlobalState } from '../../interfaces';
+import { selectCartHidden, selectCartItems } from '../../redux/selectors/cart';
+import { selectCurrentUser } from '../../redux/selectors/user';
 
 // Components
 import { ReactComponent as Logo } from '../../assets/crown.svg';
@@ -44,12 +47,9 @@ const Header: FC<IProps> = ({ currentUser, hidden }: IProps): JSX.Element => {
   );
 };
 
-const mapStateToProps = ({
-  user: { currentUser },
-  cart: { hidden },
-}: IGlobalState) => ({
-  currentUser,
-  hidden,
+const mapStateToProps = createStructuredSelector<IGlobalState, IProps>({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(Header);

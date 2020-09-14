@@ -1,6 +1,10 @@
 export interface IGlobalState {
-  user: { currentUser: ICurrentUser };
+  user: IUser;
   cart: ICart;
+}
+
+export interface IUser {
+  currentUser: ICurrentUser;
 }
 
 export interface ICurrentUser {
@@ -32,5 +36,5 @@ export interface IItem {
   name: string;
   imageUrl: string;
   price: number;
-  quantity?: number;
+  quantity: number;
 }
