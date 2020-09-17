@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { auth } from '../../firebase/firebase-utils';
 import { ICurrentUser, IGlobalState } from '../../interfaces';
-import { selectCartHidden, selectCartItems } from '../../redux/selectors/cart';
+import { selectCartHidden } from '../../redux/selectors/cart';
 import { selectCurrentUser } from '../../redux/selectors/user';
 
 // Components

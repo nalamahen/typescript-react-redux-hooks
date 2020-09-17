@@ -55,7 +55,7 @@ const App: FC = (props: any): JSX.Element => {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/shop" component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
         <Route extact path="/checkout" component={CheckoutPage} />
         <Route
           exact

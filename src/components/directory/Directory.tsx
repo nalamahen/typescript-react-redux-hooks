@@ -1,63 +1,34 @@
 // Libs
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { ISectionValues } from '../../interfaces';
+import { selectDirctorySections } from '../../redux/selectors/directory';
 
 // Components
 import MenuItem from '../menu-item';
+import { IGlobalState } from '../../interfaces';
 
 // Styles
 import { DirectoryMenuContainer } from './Directory.styles';
 
-interface ISections {
-  title: string;
-  imageUrl: string;
-  linkUrl: string;
-  id: number;
+interface IProps {
+  sections?: ISectionValues[];
 }
 
-const Directory: FC = (): JSX.Element => {
-  const sectionValues = [
-    {
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-      id: 1,
-      linkUrl: 'hats',
-    },
-    {
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-      id: 2,
-      linkUrl: '',
-    },
-    {
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-      id: 3,
-      linkUrl: '',
-    },
-    {
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-      size: 'large',
-      id: 4,
-      linkUrl: '',
-    },
-    {
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-      size: 'large',
-      id: 5,
-      linkUrl: '',
-    },
-  ];
-
-  const [sections, setSections] = useState(sectionValues);
+const Directory: FC<IProps> = ({ sections }): JSX.Element => {
   return (
     <DirectoryMenuContainer>
-      {sections.map(({ id, ...otherSectionProps }) => (
+      {sections?.map(({ id, ...otherSectionProps }) => (
         <MenuItem key={id} {...otherSectionProps} />
       ))}
     </DirectoryMenuContainer>
   );
 };
 
-export default Directory;
+const mapStateToProps = createStructuredSelector<IGlobalState, IProps>({
+  sections: selectDirctorySections,
+});
+
+export default connect(mapStateToProps)(Directory);

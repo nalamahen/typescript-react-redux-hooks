@@ -1,6 +1,8 @@
 export interface IGlobalState {
   user: IUser;
   cart: ICart;
+  directory: ISection;
+  shop: IShop;
 }
 
 export interface IUser {
@@ -28,7 +30,7 @@ export interface ICollection {
   id: number;
   title: string;
   routeName: string;
-  items: IItem;
+  items: IItem[];
 }
 
 export interface IItem {
@@ -37,4 +39,19 @@ export interface IItem {
   imageUrl: string;
   price: number;
   quantity: number;
+}
+
+export interface ISectionValues {
+  id: number;
+  title: string;
+  imageUrl: string;
+  linkUrl: string;
+}
+
+interface ISection {
+  sections: ISectionValues[];
+}
+
+interface IShop {
+  collections: ICollection[];
 }

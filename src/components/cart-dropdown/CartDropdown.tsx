@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { createStructuredSelector } from 'reselect';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import { IGlobalState, IItem } from '../../interfaces';
