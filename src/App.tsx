@@ -7,10 +7,15 @@ import { ToastContainer } from 'react-toastify';
 import { createStructuredSelector } from 'reselect';
 
 //
-import { auth, createUserProfileDocument } from './firebase/firebase-utils';
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocuments,
+} from './firebase/firebase-utils';
 import { ICurrentUser } from './interfaces';
 import { selectCurrentUser } from './redux/selectors/user';
 import { IGlobalState } from './interfaces';
+import { selectCollectionsForPreview } from './redux/selectors/shop';
 
 //actions
 import { setCurrentUser } from './redux/actions/user';
@@ -28,20 +33,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App: FC = (props: any): JSX.Element => {
   useEffect(() => {
+    const { setCurrentUser } = props;
+
     const unsuscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         if (userRef) {
           userRef.onSnapshot((snapShot) => {
-            props.setCurrentUser({
+            setCurrentUser({
               id: snapShot.id,
               ...snapShot.data(),
             });
           });
         }
       }
-      props.setCurrentUser(userAuth);
+      setCurrentUser(userAuth);
     });
 
     return () => {

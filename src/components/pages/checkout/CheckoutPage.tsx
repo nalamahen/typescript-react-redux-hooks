@@ -9,12 +9,14 @@ import {
 } from '../../../redux/selectors/cart';
 
 import CheckoutItem from '../../checkout-item/CheckoutItem';
+import StripeCheckoutButton from '../../stripe-button/StripeButton';
 
 import {
   CheckoutHeaderContainer,
   CheckoutPageContainer,
   HeaderBlockContainer,
   TotalContainer,
+  WarningContainer,
 } from './CheckoutPage.styles';
 
 interface IProps {
@@ -48,6 +50,13 @@ const CheckoutPage: FC<IProps> = ({ cartItems, total }): JSX.Element => {
       ))}
 
       <TotalContainer>Total: £{total}</TotalContainer>
+      <WarningContainer>
+        *Please use the following test credit card for payments *
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - cvv: 123
+      </WarningContainer>
+
+      <StripeCheckoutButton price={total} />
     </CheckoutPageContainer>
   );
 };
