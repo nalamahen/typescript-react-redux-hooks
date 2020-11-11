@@ -2,20 +2,10 @@ import firebase from 'firebase/app';
 
 import 'firebase/firestore';
 import 'firebase/auth';
-import { AnyAction } from 'redux';
 import { ICollection } from '../interfaces';
+import { firebaseConfig } from '../config';
 
-const config = {
-  apiKey: 'AIzaSyCwhXf64Rr6s-d2EmfRtA4l7v-h6MsYKJM',
-  authDomain: 'crown-db-3489b.firebaseapp.com',
-  databaseURL: 'https://crown-db-3489b.firebaseio.com',
-  projectId: 'crown-db-3489b',
-  storageBucket: 'crown-db-3489b.appspot.com',
-  messagingSenderId: '696761325613',
-  appId: '1:696761325613:web:22995bb4fe9c2ac74940a4',
-};
-
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 export const createUserProfileDocument = async (
   userAuth: any,

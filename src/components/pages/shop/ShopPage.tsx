@@ -9,7 +9,7 @@ import WithSpinner from '../../with-spinner/WithSpinner';
 
 import { IGlobalState } from '../../../interfaces';
 
-import { fetchCollectionsStartAsync } from '../../../redux/actions/shop';
+import { fetchCollectionsStart } from '../../../redux/actions/shop';
 import {
   selectIsCollectionFetching,
   selectCollectionsLoaded,
@@ -24,16 +24,16 @@ const CollectonPageWithSpinner = WithSpinner(CollectionPage);
 interface IProps extends RouteComponentProps {
   isCollectionFetching: boolean;
   isCollectionsLoaded: boolean;
-  fetchCollectionsStartAsync: Function;
+  fetchCollectionsStart: Function;
 }
 
 const ShopPage: FC<IProps> = ({
   match,
   isCollectionsLoaded,
-  fetchCollectionsStartAsync,
+  fetchCollectionsStart,
 }): JSX.Element => {
   useEffect(() => {
-    fetchCollectionsStartAsync();
+    fetchCollectionsStart();
   }, []);
   const unsubscribeFromSnapshot = null;
 
@@ -68,7 +68,7 @@ const mapStateToProps = (state: IGlobalState) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
