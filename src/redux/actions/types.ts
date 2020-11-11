@@ -6,6 +6,12 @@ import {
   IClearItemFromCart,
 } from './cart';
 
+import {
+  IFetchCollectionsStart,
+  IFetchCollectionsSuccess,
+  IFetchCollectionsFailure,
+} from './shop';
+
 export enum ActionTypes {
   SET_CURRENT_USER = 'SET_CURRENT_USER',
 
@@ -14,7 +20,9 @@ export enum ActionTypes {
   REMOVE_ITEM = 'REMOVE_ITEM',
   CLEAR_ITEM_FROM_CART = 'CLEAR_ITEM_FROM_CART',
 
-  UPDATE_COLLECTIONS = 'UPDATE_COLLECTIONS',
+  FETCH_COLLECTIONS_START = 'FETCH_COLLECTIONS_START',
+  FETCH_COLLECTIONS_SUCCESS = 'FETCH_COLLECTIONS_SUCCESS',
+  FETCH_COLLECTIONS_FAILURE = 'FETCH_COLLECTIONS_FAILURE',
 }
 
 export type UserAction = ISetCurrentUserAction;
@@ -24,3 +32,8 @@ export type CartAction =
   | IAddItem
   | IRemoveItemFromCart
   | IClearItemFromCart;
+
+export type ShopAction =
+  | IFetchCollectionsStart
+  | IFetchCollectionsSuccess
+  | IFetchCollectionsFailure;

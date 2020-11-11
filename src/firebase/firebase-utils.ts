@@ -6,13 +6,13 @@ import { AnyAction } from 'redux';
 import { ICollection } from '../interfaces';
 
 const config = {
-  apiKey: 'AIzaSyAa_C6DKHQj8PxvclsUC-shdJzhe6wV1k0',
-  authDomain: 'ecommerce-db-509e9.firebaseapp.com',
-  databaseURL: 'https://ecommerce-db-509e9.firebaseio.com',
-  projectId: 'ecommerce-db-509e9',
-  storageBucket: 'ecommerce-db-509e9.appspot.com',
-  messagingSenderId: '456441903886',
-  appId: '1:456441903886:web:b1ae302b01c451383f355f',
+  apiKey: 'AIzaSyCwhXf64Rr6s-d2EmfRtA4l7v-h6MsYKJM',
+  authDomain: 'crown-db-3489b.firebaseapp.com',
+  databaseURL: 'https://crown-db-3489b.firebaseio.com',
+  projectId: 'crown-db-3489b',
+  storageBucket: 'crown-db-3489b.appspot.com',
+  messagingSenderId: '696761325613',
+  appId: '1:696761325613:web:22995bb4fe9c2ac74940a4',
 };
 
 firebase.initializeApp(config);

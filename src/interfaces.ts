@@ -54,4 +54,5 @@ interface ISection {
 
 interface IShop {
   collections: ICollection[];
+  isFetching: boolean;
 }

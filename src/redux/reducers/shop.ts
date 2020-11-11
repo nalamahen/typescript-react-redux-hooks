@@ -1,17 +1,29 @@
-import { AnyAction } from 'redux';
-import { ActionTypes } from '../actions/types';
+import { ActionTypes, ShopAction } from '../actions/types';
 
 const INITIAL_STATE = {
   collections: null,
+  isFetching: false,
+  errorMessage: undefined,
 };
 
-const shopReducer = (state = INITIAL_STATE, action: AnyAction) => {
+const shopReducer = (state = INITIAL_STATE, action: ShopAction) => {
   switch (action.type) {
-    case ActionTypes.UPDATE_COLLECTIONS:
-      console.log('action.payload:', action.payload);
+    case ActionTypes.FETCH_COLLECTIONS_START:
       return {
         ...state,
+        isFetching: true,
+      };
+    case ActionTypes.FETCH_COLLECTIONS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
         collections: action.payload,
+      };
+    case ActionTypes.FETCH_COLLECTIONS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
       };
     default:
       return state;
